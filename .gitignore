@@ -6,5 +6,6 @@ report.html
 log.html
 *.iml
 *.pyc
+.gradle/
 
 
