@@ -8,4 +8,5 @@ log.html
 *.pyc
 .gradle/
 build/
+node_modules/
 
