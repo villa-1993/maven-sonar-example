@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'jetty'
+apply plugin: "jacoco"
 
 group = 'org.codehaus.sonar'
 version = '1.0-SNAPSHOT'
