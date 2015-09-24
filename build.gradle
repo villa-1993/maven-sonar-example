@@ -2,6 +2,7 @@ apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'jetty'
 apply plugin: "jacoco"
+apply plugin: 'idea'
 
 group = 'org.codehaus.sonar'
 version = '1.0-SNAPSHOT'
@@ -27,7 +28,30 @@ dependencies {
 }
 
 
+///////////////
+ext {
+	user = 'jacky'
+}
+
 task hello << {   
   println "Hello World!"
+  println user + version
+  8.times {i->print i}
+}
+
+class MyTask extends DefaultTask {
+	@Optional
+	String message = 'Uperform'
+
+	@TaskAction
+	def world() {
+		println "hello, ${message}"
+	}
+}
+
+task world(type:MyTask)
+
+task earth(type:MyTask) {
+	message = 'Agile'
 }
 
