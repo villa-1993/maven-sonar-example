@@ -3,6 +3,10 @@ apply plugin: 'maven'
 apply plugin: 'jetty'
 apply plugin: "jacoco"
 apply plugin: 'idea'
+apply plugin: 'war'
+apply plugin: 'sonar-runner'
+
+
 
 group = 'org.codehaus.sonar'
 version = '1.0-SNAPSHOT'
@@ -20,6 +24,7 @@ targetCompatibility = 1.6
 
 repositories {
      maven { url "http://repo.maven.apache.org/maven2" }
+     flatDir { dirs 'node_modules'}
 }
 
 dependencies {
@@ -55,3 +60,6 @@ task earth(type:MyTask) {
 	message = 'Agile'
 }
 
+task showCache() {
+	configurations.compile.each {println it}
+}
