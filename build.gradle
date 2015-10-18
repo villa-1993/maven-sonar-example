@@ -11,7 +11,7 @@ apply plugin: 'sonar-runner'
 group = 'org.codehaus.sonar'
 version = '1.0-SNAPSHOT'
 
-description = """Simple Java Maven Project"""
+description = """Simple Java Maven and Gradle Project"""
 
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
@@ -24,11 +24,14 @@ targetCompatibility = 1.6
 
 repositories {
      maven { url "http://repo.maven.apache.org/maven2" }
+     maven { url "http://localhost:8081/nexus/content/groups/public/" }
      flatDir { dirs 'node_modules'}
 }
 
 dependencies {
-    compile group: 'org.mockito', name: 'mockito-all', version:'1.9.5'
+	// compile group: 'commons-beanutils', name: 'commons-beanutils', version: '1.6'
+	compile group: 'log4j', name: 'log4j', version: '1.2.12'
+    testCompile group: 'org.mockito', name: 'mockito-all', version:'1.9.5'
     testCompile group: 'junit', name: 'junit', version:'4.11'
 }
 
@@ -60,6 +63,7 @@ task earth(type:MyTask) {
 	message = 'Agile'
 }
 
-task showCache() {
+task showCache << {
 	configurations.compile.each {println it}
+	configurations.testCompile.each {println it}
 }
