@@ -25,7 +25,7 @@ targetCompatibility = 1.6
 repositories {
      maven { url "http://repo.maven.apache.org/maven2" }
      maven { url "http://localhost:8081/nexus/content/groups/public/" }
-     flatDir { dirs 'node_modules'}
+     //flatDir { dirs 'node_modules'}
 }
 
 dependencies {
@@ -33,8 +33,36 @@ dependencies {
 	compile group: 'log4j', name: 'log4j', version: '1.2.12'
     testCompile group: 'org.mockito', name: 'mockito-all', version:'1.9.5'
     testCompile group: 'junit', name: 'junit', version:'4.11'
+
+    compile fileTree(dir: 'lib', include: '*.jar')
 }
 
+// sourceSets {
+//     main {
+//         java { srcDir 'src/main/java' }
+//     }
+    // test {
+    // 	java {
+    // 		srcDir 'src/test1'
+    // 	}
+    // }
+// }
+
+sourceSets.all {
+    println name
+}
+
+tasks.withType(JavaCompile) {
+		options.encoding = "UTF-8"
+}
+
+war {
+		from('html') {
+				include '**'
+				exclude 'WEB-INF'
+				into('/')
+		}
+}
 
 ///////////////
 ext {
@@ -53,17 +81,20 @@ class MyTask extends DefaultTask {
 
 	@TaskAction
 	def world() {
-		println "hello, ${message}"
+		println "hey, ${message}"
 	}
 }
 
-task world(type:MyTask)
+task world(type:MyTask) {
+	dependsOn hello
+}
 
 task earth(type:MyTask) {
 	message = 'Agile'
 }
 
 task showCache << {
+
 	configurations.compile.each {println it}
 	configurations.testCompile.each {println it}
 }
