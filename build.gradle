@@ -13,8 +13,8 @@ version = '1.0-SNAPSHOT'
 
 description = """Simple Java Maven and Gradle Project"""
 
-sourceCompatibility = 1.6
-targetCompatibility = 1.6
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 // Enable Gradle Daemon
 // touch ~/.gradle/gradle.properties && echo "org.gradle.daemon=true" >> ~/.gradle/gradle.properties
@@ -33,6 +33,8 @@ dependencies {
 	compile group: 'log4j', name: 'log4j', version: '1.2.12'
     testCompile group: 'org.mockito', name: 'mockito-all', version:'1.9.5'
     testCompile group: 'junit', name: 'junit', version:'4.11'
+    testCompile group: 'info.cukes', name: 'cucumber-junit', version:'1.2.3'
+    testCompile group: 'info.cukes', name: 'cucumber-java8', version:'1.2.3'
 
     // compile fileTree(dir: 'lib', include: '*.jar')
 }
