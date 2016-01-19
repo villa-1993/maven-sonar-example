@@ -46,7 +46,8 @@ public class MailControllerTest {
     }
 
     //    @Mocked(stubOutClassInitialization = true) final MailUtils unused = null;
-    @Mocked MailUtils unused;
+    @Mocked
+    MailUtils unused;
 
     @Test
     public void verify_a_static_method() {
@@ -61,8 +62,39 @@ public class MailControllerTest {
         mailController.displayTwice("abc");
 
         new Verifications() {{
+//            MailUtils.show((String)any);
             MailUtils.show("abc");
             times = 2;
         }};
     }
+
+    @Test
+    public void verify_a_any_object() throws Exception {
+
+        mailController.display(null);
+
+        new Verifications() {{
+            mailController.display((Box)any);
+        }};
+
+        mailController.send("Hello");
+        new Verifications() {{
+            String b1;
+            mailController.send(b1 = withCapture());
+            assertEquals("Hello", b1);
+        }};
+
+
+        Box box = new Box("zoo");
+        mailController.display(box);
+
+        new Verifications() {{
+            Box b1 = new Box("yyy");
+            mailController.display(b1);
+            assertNotEquals(box.name, b1.name);
+        }};
+
+    }
+
+
 }

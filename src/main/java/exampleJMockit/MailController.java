@@ -21,4 +21,16 @@ public class MailController {
         return "shown";
     }
 
+    public void display(Box box){
+
+    }
+}
+
+class Box {
+    public String name;
+
+    public Box(String name) {
+        this.name=name;
+    }
+
 }
