@@ -2,10 +2,13 @@ package exampleJMockit;
 
 import mockit.*;
 import mockit.integration.junit4.JMockit;
-import org.junit.*;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 @RunWith(JMockit.class)
 public class MailControllerTest {
@@ -74,7 +77,7 @@ public class MailControllerTest {
         mailController.display(null);
 
         new Verifications() {{
-            mailController.display((Box)any);
+            mailController.display((Box) any);
         }};
 
         mailController.send("Hello");
@@ -84,14 +87,21 @@ public class MailControllerTest {
             assertEquals("Hello", b1);
         }};
 
+    }
+    @Test
+    public void verify_a_any_object_with_capture(@Mocked Box mockedBox) throws Exception {
 
-        Box box = new Box("zoo");
-        mailController.display(box);
+        Box box1 = new Box("zoo1");
+        mailController.display(new Box("zoo"));
+        mailController.display(box1);
 
         new Verifications() {{
-            Box b1 = new Box("yyy");
-            mailController.display(b1);
-            assertNotEquals(box.name, b1.name);
+            List<Box> boxesInstantiated = withCapture(new Box(anyString));
+            List<Box> boxesCreated = new ArrayList<>();
+
+            mailController.display(withCapture(boxesCreated));
+
+            assertEquals(boxesInstantiated, boxesCreated);
         }};
 
     }
