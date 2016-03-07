@@ -2,7 +2,7 @@ package exampleJMockit;
 
 import mockit.*;
 import mockit.integration.junit4.JMockit;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
@@ -86,8 +86,9 @@ public class MailControllerTest {
             mailController.send(b1 = withCapture());
             assertEquals("Hello", b1);
         }};
-
     }
+
+    @Ignore
     @Test
     public void verify_a_any_object_with_capture(@Mocked Box mockedBox) throws Exception {
 
