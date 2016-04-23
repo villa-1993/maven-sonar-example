@@ -37,6 +37,20 @@
   		<version>4.12</version>
   		<scope>test</scope>
   	</dependency>
+
+    <dependency>
+      <groupId>org.spockframework</groupId>
+      <artifactId>spock-core</artifactId>
+      <version>1.0-groovy-2.4</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency> <!-- enables Spock mocking of classes (in addition to interfaces) -->
+      <groupId>cglib</groupId>
+      <artifactId>cglib-nodep</artifactId>
+      <version>3.1</version>
+      <scope>test</scope>
+    </dependency>
+
     <dependency>
         <groupId>info.cukes</groupId>
         <artifactId>cucumber-junit</artifactId>
@@ -49,6 +63,7 @@
         <version>1.2.3</version>
         <scope>test</scope>
     </dependency>    
+
   </dependencies>
   
   <build>
@@ -64,6 +79,22 @@
                   <compilerArgument>-Werror</compilerArgument>
               </configuration>
           </plugin>
+
+          <plugin>
+            <!-- The gmavenplus plugin is used to compile Groovy code. To learn more about this plugin, 
+            visit https://github.com/groovy/GMavenPlus/wiki -->
+            <groupId>org.codehaus.gmavenplus</groupId>
+            <artifactId>gmavenplus-plugin</artifactId>
+            <version>1.4</version>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>compile</goal>
+                  <goal>testCompile</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>          
       </plugins>
   </build>
 
