@@ -109,6 +109,14 @@ class GroovySyntaxTest extends GroovyTestCase {
         println animals.groupBy { it.farmer }
         println animals.groupBy { it.farmer }.collectEntries { k, v -> [k, v.price.sum()] }
 
+        def range = 1..5
+        assertEquals 5, range.size()
+        assertEquals 3, range[2]
+
+        assertEquals 2.6, 26/10
+        assertEquals java.math.BigDecimal, (26/10).class
+        assertEquals 2, 26.intdiv(10)
+        assertEquals java.lang.Integer, (26.intdiv(10)).class
     }
 
     void testListToMap() {
